@@ -1,4 +1,4 @@
-FROM python3.9:latest
+FROM python:3.9-slim-buster
 # set work directory
 WORKDIR /questionnaireBot
 

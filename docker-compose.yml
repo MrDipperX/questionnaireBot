@@ -6,3 +6,6 @@ services:
     restart: always
     volumes:
       - .:/questionnaireBot
+    depends_on:
+        - db
+  db: postgres:15.2

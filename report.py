@@ -29,3 +29,15 @@ def get_report_by_region():
 
     results.to_csv("files/report_region.csv", index=False)
     merge_all_to_a_book(glob.glob("files/report_region.csv"), "files/report_region.xlsx")
+
+
+def get_all_report():
+    db_conn = PgConn()
+    question_dict = {key: value for key, value in db_conn.get_all_questions()}
+
+    results = pd.DataFrame(db_conn.get_all_results())
+    results = results.rename(columns={0: "Savol", 1: "O'rtacha baho"})
+    results = results.replace({"Savol": question_dict})
+
+    results.to_csv("files/report.csv", index=False)
+    merge_all_to_a_book(glob.glob("files/report.csv"), "files/report.xlsx")

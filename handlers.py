@@ -4,7 +4,7 @@ from config.constants import SCHOOLS, REGIONS
 from button import phone_button, regions_buttons, schools_buttons, question_button, back_keyboard
 from db.db import PgConn
 from utils.hash_sum import hash_sum
-from report import get_report_by_region, get_report_by_school
+from report import get_report_by_region, get_report_by_school, get_all_report
 import time
 
 bot = TeleBot(token=TOKEN)
@@ -43,6 +43,16 @@ def get_school_xlsx(message):
     try:
         get_report_by_region()
         xlsx_file = open("files/report_region.xlsx.xlsx", "rb")
+        bot.send_document(message.from_user.id, xlsx_file)
+    except Exception as e:
+        print(e)
+
+
+@bot.message_handler(commands=['report'])
+def get_school_xlsx(message):
+    try:
+        get_all_report()
+        xlsx_file = open("files/report.xlsx", "rb")
         bot.send_document(message.from_user.id, xlsx_file)
     except Exception as e:
         print(e)

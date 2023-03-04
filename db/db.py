@@ -91,14 +91,22 @@ class PgConn:
 
     def get_result_by_school(self):
         with self.conn:
-            self.cur.execute("SELECT school, question_number, AVG(choice) FROM answers, users WHERE answers.user_id = users.id_tg "
+            self.cur.execute("SELECT school, question_number, AVG(choice) FROM answers, users "
+                             "WHERE answers.user_id = users.id_tg "
                              "GROUP BY school, question_number ORDER BY school, question_number")
             return self.cur.fetchall()
 
     def get_result_by_region(self):
         with self.conn:
-            self.cur.execute("SELECT region, question_number, AVG(choice) FROM answers, users WHERE answers.user_id = users.id_tg "
+            self.cur.execute("SELECT region, question_number, AVG(choice) FROM answers, users "
+                             "WHERE answers.user_id = users.id_tg "
                              "GROUP BY region, question_number ORDER BY region, question_number")
+            return self.cur.fetchall()
+
+    def get_all_results(self):
+        with self.conn:
+            self.cur.execute("SELECT question_number, AVG(choice) FROM answers GROUP BY question_number "
+                             "ORDER BY question_number")
             return self.cur.fetchall()
 
     def add_user_choice(self, question_number, user_id, choice, hashsum):

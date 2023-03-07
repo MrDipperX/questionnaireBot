@@ -11,7 +11,8 @@ def get_report_by_school():
     question_dict = {key: value for key, value in db_conn.get_all_questions()}
 
     results = pd.DataFrame(db_conn.get_result_by_school())
-    results = results.rename(columns={0: "Maktab", 1: "Savol", 2: "O'rtacha baho"})
+    results[3] = results[3].head(1)
+    results = results.rename(columns={0: "Maktab", 1: "Savol", 2: "O'rtacha baho", 3: "Ishtirokchilar soni"})
     results = results.replace({"Savol": question_dict})
 
     results.to_csv("files/report_school.csv", index=False)
@@ -23,7 +24,8 @@ def get_report_by_region():
     question_dict = {key: value for key, value in db_conn.get_all_questions()}
 
     results = pd.DataFrame(db_conn.get_result_by_region())
-    results = results.rename(columns={0: "Viloyat", 1: "Savol", 2: "O'rtacha baho"})
+    results[3] = results[3].head(1)
+    results = results.rename(columns={0: "Viloyat", 1: "Savol", 2: "O'rtacha baho", 3: "Ishtirokchilar soni"})
     results = results.replace({"Savol": question_dict})
     results = results.replace({"Viloyat": REGIONS})
 
@@ -36,7 +38,8 @@ def get_all_report():
     question_dict = {key: value for key, value in db_conn.get_all_questions()}
 
     results = pd.DataFrame(db_conn.get_all_results())
-    results = results.rename(columns={0: "Savol", 1: "O'rtacha baho"})
+    results[2] = results[2].head(1)
+    results = results.rename(columns={0: "Savol", 1: "O'rtacha baho", 2: "Ishtirokchilar soni"})
     results = results.replace({"Savol": question_dict})
 
     results.to_csv("files/report.csv", index=False)

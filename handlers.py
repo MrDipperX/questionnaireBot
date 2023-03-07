@@ -42,7 +42,7 @@ def get_school_xlsx(message):
 def get_school_xlsx(message):
     try:
         get_report_by_region()
-        xlsx_file = open("files/report_region.xlsx.xlsx", "rb")
+        xlsx_file = open("files/report_region.xlsx", "rb")
         bot.send_document(message.from_user.id, xlsx_file)
     except Exception as e:
         print(e)
@@ -190,7 +190,10 @@ def text_handle(message):
         user_temp = db.get_user_data(['temp'], user_id)
 
         if user_temp == 'open_quest':
-            bot.send_message(GROUP_ID, mess_text)
+            username, phone, school, region = db.get_user_info_for_group(user_id)
+            region = REGIONS[region]
+            text = f"Username: @{username}\nTelefon raqami: {phone}\nMaktab: {school}\nViloyat: {region}\nText: {mess_text}"
+            bot.send_message(GROUP_ID, text)
             db.update_user_data(['temp'], ['result'], user_id)
 
     except Exception as e:

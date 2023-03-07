@@ -91,21 +91,24 @@ class PgConn:
 
     def get_result_by_school(self):
         with self.conn:
-            self.cur.execute("SELECT school, question_number, AVG(choice) FROM answers, users "
+            self.cur.execute("SELECT school, question_number, AVG(choice), COUNT(DISTINCT answers.user_id) "
+                             "FROM answers, users "
                              "WHERE answers.user_id = users.id_tg "
                              "GROUP BY school, question_number ORDER BY school, question_number")
             return self.cur.fetchall()
 
     def get_result_by_region(self):
         with self.conn:
-            self.cur.execute("SELECT region, question_number, AVG(choice) FROM answers, users "
+            self.cur.execute("SELECT region, question_number, AVG(choice), COUNT(DISTINCT answers.user_id) "
+                             "FROM answers, users "
                              "WHERE answers.user_id = users.id_tg "
                              "GROUP BY region, question_number ORDER BY region, question_number")
             return self.cur.fetchall()
 
     def get_all_results(self):
         with self.conn:
-            self.cur.execute("SELECT question_number, AVG(choice) FROM answers GROUP BY question_number "
+            self.cur.execute("SELECT question_number, AVG(choice), COUNT(DISTINCT answers.user_id) "
+                             "FROM answers GROUP BY question_number "
                              "ORDER BY question_number")
             return self.cur.fetchall()
 
@@ -119,6 +122,11 @@ class PgConn:
         with self.conn:
             self.cur.execute("SELECT quest_number, quest_text FROM questions")
             return self.cur.fetchall()
+
+    def get_user_info_for_group(self, user_id):
+        with self.conn:
+            self.cur.execute("SELECT username, phone_numb, school, region FROM users WHERE id_tg = %s", (user_id, ))
+            return self.cur.fetchone
 
     # def add_answer
 

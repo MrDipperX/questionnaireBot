@@ -21,12 +21,12 @@ class PgConn:
                                     id SERIAL PRIMARY KEY NOT NULL,
                                     id_tg BIGINT ,
                                     username CHARACTER VARYING(100) ,
-                                    date_reg TIMESTAMP WITHOUT TIME ZONE,
+                                    date_reg TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
                                     phone_numb CHARACTER VARYING(15),
                                     is_admin BOOLEAN DEFAULT FALSE,
                                     region CHARACTER VARYING(100),
                                     school CHARACTER VARYING(100),
-                                    temp CHARACTER VARYING(50),
+                                    temp CHARACTER VARYING(50) DEFAULT 'None',
                                     lang CHARACTER VARYING(5))""")
             self.conn.commit()
 
@@ -47,14 +47,13 @@ class PgConn:
                                     hashsum CHARACTER VARYING(50) UNIQUE 
                                 )""")
 
-    def add_user(self, user_id, user_name, message_date):
+    def add_user(self, user_id, user_name):
         with self.conn:
             self.cur.execute(f"SELECT id FROM Users WHERE id_tg={user_id}")
             id_data = self.cur.fetchone()
             if id_data is None:
-                date_login = datetime.fromtimestamp(message_date).strftime('%d-%m-%y %H:%M:%S')
-                self.cur.execute("INSERT INTO Users(id_tg, username, date_reg) VALUES(%s,%s,%s);",
-                                 (user_id, user_name, date_login))
+                self.cur.execute("INSERT INTO Users(id_tg, username) VALUES(%s,%s);",
+                                 (user_id, user_name))
                 self.conn.commit()
 
     def add_init_questions(self):

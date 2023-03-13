@@ -14,7 +14,7 @@ bot = TeleBot(token=TOKEN)
 def start_handle(message):
     db = PgConn()
     user_id = message.from_user.id
-    db.add_user(user_id, message.from_user.username, message.date)
+    db.add_user(user_id, message.from_user.username)
 
     if db.get_user_data(['temp'], user_id) == 'result':
         lang = db.get_user_data(['lang'], user_id)
@@ -77,9 +77,9 @@ def callback_worker(call):
     try:
         db = PgConn()
         user_id = call.message.chat.id
-        lang = db.get_user_data(['lang'], user_id)
 
         if db.get_user_data(['temp'], user_id) == 'choose_region' and call.data != 'back':
+            lang = db.get_user_data(['lang'], user_id)
             if lang == 'uz':
                 regions = REGIONS_UZ
             elif lang == 'ru':
@@ -95,6 +95,7 @@ def callback_worker(call):
 
         elif db.get_user_data(['temp'], user_id) == 'choose_school' and \
                 call.data in list(SCHOOLS[db.get_user_data(['region'], user_id)]):
+            lang = db.get_user_data(['lang'], user_id)
             db.update_user_data(['school'], [call.data], user_id)
             quest_text = db.get_question_text(1, lang)
             bot.edit_message_text(chat_id=user_id, message_id=call.message.id,
@@ -106,23 +107,24 @@ def callback_worker(call):
             bot.delete_message(user_id, call.message.message_id)
             bot.send_message(chat_id=user_id,
                              text=phrases['uz']['ComeToQuestions']+"\n\nTelefon raqamingingizni qoldiring",
-                             reply_markup=phone_button(lang))
+                             reply_markup=phone_button('uz'))
 
         elif db.get_user_data(['temp'], user_id) == 'start' and call.data == 'ru':
             db.update_user_data(['lang'], ['ru'], user_id)
             bot.delete_message(user_id, call.message.message_id)
             bot.send_message(chat_id=user_id,
                              text=phrases['ru']['ComeToQuestions']+"\n\nВведите номер телефона",
-                             reply_markup=phone_button(lang))
+                             reply_markup=phone_button('ru'))
 
         elif db.get_user_data(['temp'], user_id) == 'start' and call.data == 'kr':
             db.update_user_data(['lang'], ['kr'], user_id)
             bot.delete_message(user_id, call.message.message_id)
             bot.send_message(chat_id=user_id,
                              text=phrases['kr']['ComeToQuestions']+"\n\nTelefon nomeringingizni qaldıring",
-                             reply_markup=phone_button(lang))
+                             reply_markup=phone_button('kr'))
 
         elif call.data in ['1', '2', '3', '4', '5']:
+            lang = db.get_user_data(['lang'], user_id)
             user_temp = db.get_user_data(['temp'], user_id)
             question_number = int(user_temp[-1])
             hashsum = hash_sum([question_number, user_id])
@@ -156,6 +158,7 @@ def callback_worker(call):
                 db.update_user_data(['temp'], ['open_quest'], user_id)
 
         elif call.data == 'back':
+            lang = db.get_user_data(['lang'], user_id)
             user_temp = db.get_user_data(['temp'], user_id)
             if user_temp == 'choose_region':
                 bot.delete_message(user_id, call.message.message_id)

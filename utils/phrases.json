@@ -8,7 +8,8 @@
     "Back": "Ortga",
     "ComeToQuestions": "Hurmatli ota-onalar!\nSizning fikringiz biz uchun muhim. Har bir savol uchun o‘zingiz to‘g‘ri deb bilgan bahoni belgilang! Kerakli joyda yozma ravishda fikr va mulohazalaringizni qoldiring!\n\tSo‘rovnomada ism-sharifingiz so‘ralmaydi. Sizning fikringiz faqat umumlashtirilgan holda ko‘rib chiqiladi.\n\tUshbu so‘rovnoma muassasada o‘quvchilarga yaratilgan shart-sharoitlar va o‘quv-tarbiya jarayonini uchun yaratilgan ta’lim muhitiga baho berish hamda natijasi asosida muassasa tomonidan ko‘rsatiladigan ta’lim xizmatlarini yanada takomillashtirishga yordam beradi.\n\tSizning to‘g‘ri va samimiy javoblaringiz uchun oldindan minnatdorchilik bildiramiz! \n",
     "Additional_question": "Qo‘shimcha fikr va mulohazalaringizni yozib qoldiring.",
-    "Have": "So'rovnomada qatnashganingiz uchun raxmat!"
+    "Have": "So'rovnomada qatnashganingiz uchun raxmat!",
+    "No Data": "Ma'lumotlar yo'q"
   },
   "ru":
   {
@@ -20,7 +21,8 @@
     "Back": "Назад",
     "ComeToQuestions": "Уважаемые родители!\nВаше мнение для нас очень важно! \nПод каждым вопросом поставьте оценку, которую считаете правильной на ваш взгляд. Там, где необходимо, оставьте пожалуйста письменные комментарии. \n          Опрос анонимный. Ваше мнение будет рассмотрено в обобщённом виде.\n\tДанный социальный опрос поможет оценить условия и образовательную среду, предоставленные для учащихся в учебном заведении, а также поможет дальнейшему совершенствованию образовательных услуг, предоставляемых учебным заведением. \n\tЗаранее благодарим Вас за ваши ответы!\n",
     "Additional_question": "Оставьте ваши комментарии.",
-    "Have": "Спасибо за участие в опросе!"
+    "Have": "Спасибо за участие в опросе!",
+    "No Data": "Нет данных"
   },
   "kr":
   {
@@ -32,7 +34,8 @@
     "Back": "Artqa ",
     "ComeToQuestions": "Húrmetli ata-analar!\n\n Sizdiń pikirińiz biz ushın zárúrli. Hár bir soraw ushın ózińiz tuwrı dep bilgen bahanı  belgileń! Kerekli orında jazba túrde pikir hám oy-pikirlerińizdi qaldıring!\n \tSorawnamada ism-sharıfińiz soralmaydi. Sizdiń pikirińiz tek ulıwmalastırılǵan halda kórip shıǵıladı.\n \tBul sorawnama mektepde oqıwshılarǵa jaratılǵan shárt-shárayatlar hám oqıw -tárbiya procesi ushın jaratılǵan tálim ortalıǵına baha beriw hám de nátiyjesi tiykarında mektep  tárepinen kórsetiletuǵın tálim xızmetlerin jáne de jetilistiriwge járdem beredi.\n \tSiziń tuwrı hám shın júrekten bergen juwaplarıńız ushın aldınnan minnetdarshılıq bildiremiz! \n",
     "Additional_question": "Qosımsha usınıs hám  oy-pikirlerińizdi jazıp qaldıring!.",
-    "Have": "Sorawnamada qatnasqanıńız ushın raxmat!"
+    "Have": "Sorawnamada qatnasqanıńız ushın raxmat!",
+    "No Data": "Maǵlıwmatlar joq "
 
   }
 }

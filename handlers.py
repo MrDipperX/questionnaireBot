@@ -29,9 +29,16 @@ def start_handle(message):
 @bot.message_handler(commands=['school'])
 def get_school_xlsx(message):
     try:
-        get_report_by_school()
-        xlsx_file = open("files/report_school.xlsx", "rb")
-        bot.send_document(message.from_user.id, xlsx_file)
+        empty = get_report_by_school()
+        user_id = message.from_user.id
+        if empty == "Empty":
+            db = PgConn()
+            lang = db.get_user_data(['lang'], user_id)
+            lang = 'uz' if lang is None else lang
+            bot.send_message(user_id, phrases[lang]['No Data'])
+        else:
+            xlsx_file = open("files/report_school.xlsx", "rb")
+            bot.send_document(user_id, xlsx_file)
     except Exception as e:
         print(e)
 
@@ -39,9 +46,16 @@ def get_school_xlsx(message):
 @bot.message_handler(commands=['region'])
 def get_school_xlsx(message):
     try:
-        get_report_by_region()
-        xlsx_file = open("files/report_region.xlsx", "rb")
-        bot.send_document(message.from_user.id, xlsx_file)
+        empty = get_report_by_region()
+        user_id = message.from_user.id
+        if empty == "Empty":
+            db = PgConn()
+            lang = db.get_user_data(['lang'], user_id)
+            lang = 'uz' if lang is None else lang
+            bot.send_message(user_id, phrases[lang]['No Data'])
+        else:
+            xlsx_file = open("files/report_region.xlsx", "rb")
+            bot.send_document(user_id, xlsx_file)
     except Exception as e:
         print(e)
 
@@ -49,9 +63,16 @@ def get_school_xlsx(message):
 @bot.message_handler(commands=['report'])
 def get_school_xlsx(message):
     try:
-        get_all_report()
-        xlsx_file = open("files/report.xlsx", "rb")
-        bot.send_document(message.from_user.id, xlsx_file)
+        empty = get_all_report()
+        user_id = message.from_user.id
+        if empty == "Empty":
+            db = PgConn()
+            lang = db.get_user_data(['lang'], user_id)
+            lang = 'uz' if lang is None else lang
+            bot.send_message(user_id, phrases[lang]['No Data'])
+        else:
+            xlsx_file = open("files/report.xlsx", "rb")
+            bot.send_document(user_id, xlsx_file)
     except Exception as e:
         print(e)
 

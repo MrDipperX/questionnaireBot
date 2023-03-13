@@ -11,6 +11,8 @@ def get_report_by_school():
     question_dict = {key: value for key, value in db_conn.get_all_questions()}
 
     results = pd.DataFrame(db_conn.get_result_by_school())
+    if results.empty is True:
+        return "Empty"
     results[3] = results[3].head(1)
     results = results.rename(columns={0: "Maktab", 1: "Savol", 2: "O'rtacha baho", 3: "Ishtirokchilar soni"})
     results = results.replace({"Savol": question_dict})
@@ -24,6 +26,8 @@ def get_report_by_region():
     question_dict = {key: value for key, value in db_conn.get_all_questions()}
 
     results = pd.DataFrame(db_conn.get_result_by_region())
+    if results.empty is True:
+        return "Empty"
     results[3] = results[3].head(1)
     results = results.rename(columns={0: "Viloyat", 1: "Savol", 2: "O'rtacha baho", 3: "Ishtirokchilar soni"})
     results = results.replace({"Savol": question_dict})
@@ -38,6 +42,8 @@ def get_all_report():
     question_dict = {key: value for key, value in db_conn.get_all_questions()}
 
     results = pd.DataFrame(db_conn.get_all_results())
+    if results.empty is True:
+        return "Empty"
     results[2] = results[2].head(1)
     results = results.rename(columns={0: "Savol", 1: "O'rtacha baho", 2: "Ishtirokchilar soni"})
     results = results.replace({"Savol": question_dict})

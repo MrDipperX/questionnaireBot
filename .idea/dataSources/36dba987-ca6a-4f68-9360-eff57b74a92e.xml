@@ -810,11 +810,11 @@ false Zulu
     <database id="7" parent="1" name="QuestionnaireBot">
       <ObjectId>44644</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>6804</IntrospectionStateNumber>
+      <IntrospectionStateNumber>6829</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|44885|44886|1
-sequence|table|44897|44898|1
-sequence|table|44916|44917|1
+sequence|table|44926|44927|1
+sequence|table|44936|44937|1
 </Relations>
     </database>
     <database id="8" parent="1" name="RailwayBot">
@@ -931,7 +931,7 @@ UC/10
 </Acl>
       <StateNumber>527</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>6805</IntrospectionStateNumber>
+      <IntrospectionStateNumber>6830</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="34" parent="7" name="plpgsql">
@@ -1032,9 +1032,9 @@ UC/10
       <Type>index</Type>
     </access-method>
     <sequence id="46" parent="33" name="answers_id_seq">
-      <ObjectId>44897</ObjectId>
+      <ObjectId>44936</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>6680</StateNumber>
+      <StateNumber>6822</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="47" parent="33" name="questions_id_seq">
@@ -1044,15 +1044,15 @@ UC/10
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="48" parent="33" name="users_id_seq">
-      <ObjectId>44916</ObjectId>
+      <ObjectId>44926</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <table id="49" parent="33" name="answers">
-      <ObjectId>44898</ObjectId>
+      <ObjectId>44937</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>6680</StateNumber>
+      <StateNumber>6822</StateNumber>
     </table>
     <table id="50" parent="33" name="questions">
       <ObjectId>44886</ObjectId>
@@ -1060,45 +1060,45 @@ UC/10
       <StateNumber>6680</StateNumber>
     </table>
     <table id="51" parent="33" name="users">
-      <ObjectId>44917</ObjectId>
+      <ObjectId>44927</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
     </table>
     <column id="52" parent="49" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>6680</StateNumber>
+      <StateNumber>6822</StateNumber>
       <DefaultExpression>nextval(&apos;answers_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
     <column id="53" parent="49" name="question_number">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>6680</StateNumber>
+      <StateNumber>6822</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="54" parent="49" name="user_id">
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
-      <StateNumber>6680</StateNumber>
+      <StateNumber>6822</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="55" parent="49" name="choice">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>6680</StateNumber>
+      <StateNumber>6822</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="56" parent="49" name="hashsum">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
-      <StateNumber>6680</StateNumber>
+      <StateNumber>6822</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="57" parent="49" name="answers_pkey">
-      <ObjectId>44902</ObjectId>
-      <StateNumber>6680</StateNumber>
+      <ObjectId>44941</ObjectId>
+      <StateNumber>6822</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1107,8 +1107,8 @@ UC/10
       <ClassIds>1978</ClassIds>
     </index>
     <index id="58" parent="49" name="answers_hashsum_key">
-      <ObjectId>44904</ObjectId>
-      <StateNumber>6680</StateNumber>
+      <ObjectId>44943</ObjectId>
+      <StateNumber>6822</StateNumber>
       <ColNames>hashsum</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
@@ -1117,15 +1117,15 @@ UC/10
       <ClassIds>3126</ClassIds>
     </index>
     <key id="59" parent="49" name="answers_pkey">
-      <ObjectId>44903</ObjectId>
-      <StateNumber>6680</StateNumber>
+      <ObjectId>44942</ObjectId>
+      <StateNumber>6822</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>answers_pkey</UnderlyingIndexName>
     </key>
     <key id="60" parent="49" name="answers_hashsum_key">
-      <ObjectId>44905</ObjectId>
-      <StateNumber>6680</StateNumber>
+      <ObjectId>44944</ObjectId>
+      <StateNumber>6822</StateNumber>
       <ColNames>hashsum</ColNames>
       <UnderlyingIndexName>answers_hashsum_key</UnderlyingIndexName>
     </key>
@@ -1201,70 +1201,70 @@ UC/10
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
     <column id="71" parent="51" name="id_tg">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="72" parent="51" name="username">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="73" parent="51" name="date_reg">
       <Position>4</Position>
       <DataType>timestamp with time zone|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <DefaultExpression>now()</DefaultExpression>
       <TypeId>1184</TypeId>
     </column>
     <column id="74" parent="51" name="phone_numb">
       <Position>5</Position>
       <DataType>varchar(15)|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="75" parent="51" name="is_admin">
       <Position>6</Position>
       <DataType>boolean|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
     <column id="76" parent="51" name="region">
       <Position>7</Position>
       <DataType>varchar(100)|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="77" parent="51" name="school">
       <Position>8</Position>
       <DataType>varchar(100)|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="78" parent="51" name="temp">
       <Position>9</Position>
       <DataType>varchar(50)|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <DefaultExpression>&apos;None&apos;::character varying</DefaultExpression>
       <TypeId>1043</TypeId>
     </column>
     <column id="79" parent="51" name="lang">
       <Position>10</Position>
       <DataType>varchar(5)|0s</DataType>
-      <StateNumber>6803</StateNumber>
+      <StateNumber>6821</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="80" parent="51" name="users_pkey">
-      <ObjectId>44924</ObjectId>
-      <StateNumber>6803</StateNumber>
+      <ObjectId>44934</ObjectId>
+      <StateNumber>6821</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1273,8 +1273,8 @@ UC/10
       <ClassIds>1978</ClassIds>
     </index>
     <key id="81" parent="51" name="users_pkey">
-      <ObjectId>44925</ObjectId>
-      <StateNumber>6803</StateNumber>
+      <ObjectId>44935</ObjectId>
+      <StateNumber>6821</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>

@@ -1,8 +1,22 @@
-REGIONS = {
+REGIONS_UZ = {
     "QQR": "Qoraqalpog'iston Respublikasi", "AV": "Andijon viloyati", "BV": "Buxoro viloyati", "JV": "Jizzax viloyati",
     "QV": "Qashqadaryo viloyati", "NavV": "Navoiy viloyati", "NamV": "Namangan viloyati", "SamV": "Samarqand viloyati",
     "SurV": "Surxondaryo viloyati", "SirV": "Sirdaryo viloyati", "TV": "Toshkent viloyati", "FV": "Farg'ona viloyati",
     "XV": "Xorazm viloyati", "TSh": "Toshkent shahri"
+}
+
+REGIONS_RU = {
+    "QQR": "Каракалпакская республика ", "AV": "Андижанский вилоят", "BV": "Бухарский вилоят", "JV": "Джизакский вилоят",
+    "QV": "Кашкадарьинский вилоят", "NavV": "Навоийский вилоят", "NamV": "Наманганский вилоят", "SamV": "Самаркандский вилоят",
+    "SurV": "Сурхандарьинский вилоят", "SirV": "Сырдарьинский вилоят", "TV": "Ташкентский вилоят", "FV": "Ферганский вилоят",
+    "XV": "Хорезмский вилоят", "TSh": "город Ташкент"
+}
+
+REGIONS_KR = {
+    "QQR": "Qaraqalpaqstan Respublikası", "AV": "Andijan wálayatı", "BV": "Buxara wálayatı", "JV": "Jizzaq wálayatı",
+    "QV": "Qashqadárya wálayatı", "NavV": "Navaiy wálayatı", "NamV": "Namangan wálayatı", "SamV": "Samarqand wálayatı",
+    "SurV": "Surxondaryo wálayatı", "SirV": "Sirdaryo wálayatı", "TV": "Tashkent wálayatı", "FV": "Ferǵana  wálayatı",
+    "XV": "Xorezm viloyati", "TSh": "Tashkent qalası"
 }
 
 SCHOOLS = {
@@ -118,10 +132,28 @@ SCHOOLS = {
 }
 
 
-QUESTIONS = [
+QUESTIONS_UZ = [
     "Muassasadagi ta’lim jarayonini tashkil etishda rahbariyat tomonidan amalga oshirilayotgan ishlarni qanday baholaysiz?",
     "Muassasadagi o‘qituvchilar tomonidan farzandingizga berilayotgan ta’lim sifatiga baho bering.",
     "Muassasada farzandingizni ta’lim-tarbiya olishi uchun yaratilgan shart-sharoitlarga baho bering",
     "Muassasada tashkil etilgan fan va sport to‘garak mashg‘ulotlari samaradorligi (natijadorligi)ni baholang",
     "Farzandingizga muassasada berilayotgan ta’lim sifatiga umumiy va yakuniy baho bering"
 ]
+
+QUESTIONS_RU = [
+    "Как Вы оцениваете деятельность руководства учебного заведения по организации учебного процесса?",
+    "Дайте оценку деятельности учителей по качеству преподавания.",
+    "Оцените условия, созданные для обучения вашего ребенка в данном учебном заведении",
+    "Оцените результативность предметных и спортивных кружков, организованных в учебном заведении",
+    "Дайте общую и итоговую оценку качеству образования, предоставляемого вашему ребенку в учебном заведении"
+]
+
+QUESTIONS_KR = [
+    "Makteptegi tálim procesin shólkemlestiriwde administraciya tárepinen ámelge asırılıp atırǵan islerdi qanday bahalaysiz?",
+    "Makteptegi oqıtıwshılar tárepinen perzentińizge berilip atırǵan tálim sapasına baha beriń",
+    "Maktepte perzentińizdi tálim-tárbiya alıwı ushın jaratılǵan shárt-shárayatlarǵa baha beriń",
+    "Maktepte islengen pán hám sport to'gerek shınıǵıwları natiyjeliligin  bahalań",
+    "Perzentińizge mektepte berilip atırǵan tálim sapasına ulıwma hám juwmaqlawshı baha beriń"
+]
+
+REGIONS = True

@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import sql
 from datetime import datetime
 from config.config import HOST, PORT, DBNAME, PASSWORD, USER
-from config.constants import QUESTIONS
+from config.constants import QUESTIONS_UZ, QUESTIONS_RU, QUESTIONS_KR
 
 
 class PgConn:
@@ -26,14 +26,16 @@ class PgConn:
                                     is_admin BOOLEAN DEFAULT FALSE,
                                     region CHARACTER VARYING(100),
                                     school CHARACTER VARYING(100),
-                                    temp CHARACTER VARYING(50))""")
+                                    temp CHARACTER VARYING(50),
+                                    lang CHARACTER VARYING(5))""")
             self.conn.commit()
 
             self.cur.execute(""" CREATE TABLE IF NOT EXISTS Questions(
                                     id SERIAL PRIMARY KEY NOT NULL,
                                     quest_number INTEGER NOT NULL,
-                                    quest_text TEXT UNIQUE NOT NULL ,
-                                    is_deleted BOOLEAN DEFAULT FALSE
+                                    quest_text TEXT UNIQUE NOT NULL,
+                                    is_deleted BOOLEAN DEFAULT FALSE,
+                                    lang CHARACTER VARYING(10)
                                 )
             """)
 
@@ -56,9 +58,17 @@ class PgConn:
                 self.conn.commit()
 
     def add_init_questions(self):
-        values = [[i+1, value] for i, value in enumerate(QUESTIONS)]
-        self.cur.executemany(""" INSERT INTO questions(quest_number, quest_text) VALUES(%s, %s) 
+        values = [[i+1, value] for i, value in enumerate(QUESTIONS_UZ)]
+        self.cur.executemany(""" INSERT INTO questions(quest_number, quest_text, lang) VALUES(%s, %s, 'uz') 
                                     ON CONFLICT(quest_text) DO NOTHING """, values)
+
+        values = [[i + 1, value] for i, value in enumerate(QUESTIONS_RU)]
+        self.cur.executemany(""" INSERT INTO questions(quest_number, quest_text, lang) VALUES(%s, %s, 'ru') 
+                                            ON CONFLICT(quest_text) DO NOTHING """, values)
+
+        values = [[i + 1, value] for i, value in enumerate(QUESTIONS_KR)]
+        self.cur.executemany(""" INSERT INTO questions(quest_number, quest_text, lang) VALUES(%s, %s, 'kr') 
+                                            ON CONFLICT(quest_text) DO NOTHING """, values)
         self.conn.commit()
 
     def update_user_data(self, cols: list, values: list, id_tg: int):
@@ -84,9 +94,10 @@ class PgConn:
             self.cur.execute("DELETE FROM Users WHERE id_tg = %s;", (user_id,))
             self.conn.commit()
 
-    def get_question_text(self, quest_number):
+    def get_question_text(self, quest_number, lang):
         with self.conn:
-            self.cur.execute("SELECT quest_text FROM questions WHERE quest_number = %s", (quest_number, ))
+            self.cur.execute("SELECT quest_text FROM questions WHERE quest_number = %s AND lang = %s",
+                             (quest_number, lang))
             return self.cur.fetchone()[0]
 
     def get_result_by_school(self):
@@ -120,13 +131,13 @@ class PgConn:
 
     def get_all_questions(self):
         with self.conn:
-            self.cur.execute("SELECT quest_number, quest_text FROM questions")
+            self.cur.execute("SELECT quest_number, quest_text FROM questions WHERE lang = 'uz'")
             return self.cur.fetchall()
 
     def get_user_info_for_group(self, user_id):
         with self.conn:
-            self.cur.execute("SELECT username, phone_numb, school, region FROM users WHERE id_tg = %s", (user_id, ))
-            return self.cur.fetchone
+            self.cur.execute("SELECT username, phone_numb, school, region, lang FROM users WHERE id_tg = %s", (user_id, ))
+            return self.cur.fetchone()
 
     # def add_answer
 

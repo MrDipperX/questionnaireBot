@@ -1,7 +1,7 @@
 from db.db import PgConn
 import pandas as pd
 from pyexcel.cookbook import merge_all_to_a_book
-from config.constants import REGIONS
+from config.constants import REGIONS_UZ
 
 import glob
 
@@ -27,7 +27,7 @@ def get_report_by_region():
     results[3] = results[3].head(1)
     results = results.rename(columns={0: "Viloyat", 1: "Savol", 2: "O'rtacha baho", 3: "Ishtirokchilar soni"})
     results = results.replace({"Savol": question_dict})
-    results = results.replace({"Viloyat": REGIONS})
+    results = results.replace({"Viloyat": REGIONS_UZ})
 
     results.to_csv("files/report_region.csv", index=False)
     merge_all_to_a_book(glob.glob("files/report_region.csv"), "files/report_region.xlsx")

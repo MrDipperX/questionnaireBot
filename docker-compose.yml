@@ -1,11 +1,14 @@
 version: '3'
 
 services:
+  db:
+    image:
+      postgres:15.2
   app:
+    image: quest
     build: .
     restart: always
     volumes:
       - .:/questionnaireBot
     depends_on:
-        - db
-  db: postgres:15.2
+      - db

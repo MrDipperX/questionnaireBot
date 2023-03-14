@@ -4,8 +4,15 @@ services:
   db:
     image:
       postgres:15.2
+    container_name: postgres
+    ports: "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "Naruhina"
+      POSTGRES_DB: "QuestionnaireBot"
+      POSTGRES_USER: "postgres"
   app:
     image: quest
+    container_name: quest
     build: .
     restart: always
     volumes:

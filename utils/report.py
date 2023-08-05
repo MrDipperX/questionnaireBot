@@ -1,7 +1,7 @@
 from db.db import PgConn
 import pandas as pd
 from pyexcel.cookbook import merge_all_to_a_book
-from config.constants import REGIONS_UZ
+from utils.constants import REGIONS_UZ
 
 import glob
 
@@ -49,4 +49,4 @@ def get_all_report():
     results = results.replace({"Savol": question_dict})
 
     results.to_csv("files/report.csv", index=False)
-    merge_all_to_a_book(glob.glob("files/report.csv"), "files/report.xlsx")
+    merge_all_to_a_book(glob.glob("../files/report.csv"), "files/report.xlsx")

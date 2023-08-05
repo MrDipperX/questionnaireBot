@@ -1,5 +1,6 @@
-from handlers import bot
+from loader import bot
 from db.db import PgConn
+import handlers
 
 
 if __name__ == '__main__':

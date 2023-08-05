@@ -1,96 +1,9 @@
-from telebot import TeleBot
-from config.config import TOKEN, phrases, GROUP_ID
-from config.constants import SCHOOLS, REGIONS_UZ, REGIONS_KR, REGIONS_RU
-from button import phone_button, regions_buttons, schools_buttons, question_button, back_keyboard, lang_buttons
+from loader import bot
 from db.db import PgConn
+from utils.lang import phrases
+from keyboards.button import schools_buttons, regions_buttons, question_button, phone_button, back_keyboard
 from utils.hash_sum import hash_sum
-from report import get_report_by_region, get_report_by_school, get_all_report
-
-
-bot = TeleBot(token=TOKEN)
-
-
-@bot.message_handler(commands=['start'])
-def start_handle(message):
-    db = PgConn()
-    user_id = message.from_user.id
-    db.add_user(user_id, message.from_user.username)
-
-    if db.get_user_data(['temp'], user_id) == 'result':
-        lang = db.get_user_data(['lang'], user_id)
-        bot.send_message(user_id, phrases[lang]['Have'])
-    else:
-        db.update_user_data(['temp'], ['start'], user_id)
-        bot.send_message(user_id, f"🇺🇿 Assalomu alaykum, tilni tanlang\n\n🇷🇺 Здарвствуйте, выберите язык"
-                                  f"\n\n🇺🇿 Assalawma aleykum, tildi saylań ",
-                         reply_markup=lang_buttons())
-
-
-@bot.message_handler(commands=['school'])
-def get_school_xlsx(message):
-    try:
-        empty = get_report_by_school()
-        user_id = message.from_user.id
-        if empty == "Empty":
-            db = PgConn()
-            lang = db.get_user_data(['lang'], user_id)
-            lang = 'uz' if lang is None else lang
-            bot.send_message(user_id, phrases[lang]['No Data'])
-        else:
-            xlsx_file = open("files/report_school.xlsx", "rb")
-            bot.send_document(user_id, xlsx_file)
-    except Exception as e:
-        print(e)
-
-
-@bot.message_handler(commands=['region'])
-def get_school_xlsx(message):
-    try:
-        empty = get_report_by_region()
-        user_id = message.from_user.id
-        if empty == "Empty":
-            db = PgConn()
-            lang = db.get_user_data(['lang'], user_id)
-            lang = 'uz' if lang is None else lang
-            bot.send_message(user_id, phrases[lang]['No Data'])
-        else:
-            xlsx_file = open("files/report_region.xlsx", "rb")
-            bot.send_document(user_id, xlsx_file)
-    except Exception as e:
-        print(e)
-
-
-@bot.message_handler(commands=['report'])
-def get_school_xlsx(message):
-    try:
-        empty = get_all_report()
-        user_id = message.from_user.id
-        if empty == "Empty":
-            db = PgConn()
-            lang = db.get_user_data(['lang'], user_id)
-            lang = 'uz' if lang is None else lang
-            bot.send_message(user_id, phrases[lang]['No Data'])
-        else:
-            xlsx_file = open("files/report.xlsx", "rb")
-            bot.send_document(user_id, xlsx_file)
-    except Exception as e:
-        print(e)
-
-
-@bot.message_handler(content_types=['contact'])
-def get_contact(message):
-    try:
-        db = PgConn()
-        user_id = message.from_user.id
-
-        if db.get_user_data(['temp'], user_id) == 'start':
-            db.update_user_data(['phone_numb'], [message.contact.phone_number], user_id)
-            lang = db.get_user_data(['lang'], user_id)
-            bot.send_message(user_id, phrases[lang]['Region'], reply_markup=regions_buttons(lang))
-            db.update_user_data(['temp'], ['choose_region'], user_id)
-
-    except Exception as e:
-        print(e)
+from utils.constants import REGIONS_UZ, REGIONS_RU, REGIONS_KR, SCHOOLS
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -231,29 +144,3 @@ def callback_worker(call):
 
     except Exception as e:
         print(e)
-
-
-@bot.message_handler(content_types=['text'])
-def text_handle(message):
-    try:
-        db = PgConn()
-        user_id = message.chat.id
-        mess_text = message.text.strip()
-
-        user_temp = db.get_user_data(['temp'], user_id)
-
-        if user_temp == 'open_quest':
-            username, phone, school, region, lang = db.get_user_info_for_group(user_id)
-
-            region = REGIONS_UZ[region]
-            text = f"Username: @{username}\nTelefon raqami: {phone}\nMaktab: {school}\nViloyat: {region}\nText: {mess_text}"
-            bot.delete_message(user_id, message.message_id - 1)
-            bot.send_message(GROUP_ID, text)
-            bot.send_message(user_id, phrases[lang]['Have'])
-            db.update_user_data(['temp'], ['result'], user_id)
-
-    except Exception as e:
-        print(e)
-
-
-

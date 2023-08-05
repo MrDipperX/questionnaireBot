@@ -1,6 +1,6 @@
 from telebot import types
-from config.config import phrases
-from config.constants import REGIONS_KR, REGIONS_RU, REGIONS_UZ, SCHOOLS
+from utils.lang import phrases
+from utils.constants import REGIONS_KR, REGIONS_RU, REGIONS_UZ, SCHOOLS
 
 
 def lang_buttons():

@@ -1,8 +1,7 @@
 import psycopg2
 from psycopg2 import sql
-from datetime import datetime
 from config.config import HOST, PORT, DBNAME, PASSWORD, USER
-from config.constants import QUESTIONS_UZ, QUESTIONS_RU, QUESTIONS_KR
+from utils.constants import QUESTIONS_UZ, QUESTIONS_RU, QUESTIONS_KR
 
 
 class PgConn:
